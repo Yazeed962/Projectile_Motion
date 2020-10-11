@@ -82,7 +82,9 @@ class projectile_calculations:
              self, 0, self.velocity, self.delta_t, self.mass, self.rho, self.area, self.C, self.v_x, self.trip_time, 0)
         self.y_max = max(projectile_calculations.y_vals)
 
-        return f" The trip time is {self.trip_time}, The range is {self.x_max}, The maximum hight is {self.y_max}"
+        return f""" The trip time is {round(self.trip_time, 2)} seconds
+The range is {round(self.x_max, 2)} meters
+The maximum hight is {round(self.y_max, 2)} meters"""
         
         
         
