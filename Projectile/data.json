@@ -3,8 +3,7 @@
     "V_INITIAL" : 10,
     "MASS" : 2,
     "DIAMETER" : 0.4,
-    "DENSITY" : 1.225,
     "Y_INITIAL" : 0,
-    "DELTA_T" : 0.000001,
+    "DELTA_T" : 0.001,
     "C" : 0.04
 }
