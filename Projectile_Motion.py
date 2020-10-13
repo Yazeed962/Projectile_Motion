@@ -28,6 +28,6 @@ def main():
     print(f"""The trip time is {time} seconds
     The range is {x_max} meters
     The maximum hight is {y_max} meters""")
-
-    if __name__ == '__main__':
-        main()
+    
+if __name__ == '__main__':
+    main()
