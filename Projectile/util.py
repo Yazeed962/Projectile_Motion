@@ -11,7 +11,7 @@ class projectile_calculations:
     # sys.setrecursionlimit(1000000000)
     trip_time = 0
     x_max = 0
-    y_vals = list()
+    y_max = 0
     def __init__(self, y_initial, velocity, delta_t, mass, diameter, C, theta):
         
         self.g = -9.81
@@ -38,7 +38,7 @@ class projectile_calculations:
 
     @tail_recursive
     def integration(
-        self, position, velocity, acceleration, delta_t, mass, rho, area, C, v_y, time, y_vals
+        self, position, velocity, acceleration, delta_t, mass, rho, area, C, v_y, time
         ):
         if position >= 0:
             drag_force = self.drag(rho, C, area, velocity)
@@ -46,10 +46,11 @@ class projectile_calculations:
             v_new = v_y + a_y * delta_t
             v_avg = (v_y + v_new) / 2
             p_new = (position + v_avg * delta_t)    
-            y_vals.append(p_new)
+            if p_new > position:
+                self.y_max = p_new
             v_tot_new = velocity - drag_force / mass * delta_t
             time += delta_t
-            recurse(self, p_new, v_tot_new, acceleration, delta_t, mass, rho, area, C, v_new, time, y_vals)
+            recurse(self, p_new, v_tot_new, acceleration, delta_t, mass, rho, area, C, v_new, time)
         else:
 
             return time
@@ -77,12 +78,12 @@ class projectile_calculations:
 
     def run(self):
         self.trip_time = projectile_calculations.integration(
-             self, self.y_initial, self.velocity, self.g, self.delta_t, self.mass, self.rho, self.area, self.C, self.v_y, 0, projectile_calculations.y_vals)
+             self, self.y_initial, self.velocity, self.g, self.delta_t, self.mass, self.rho, self.area, self.C, self.v_y, 0)
         self.x_max = projectile_calculations.x_position(
              self, 0, self.velocity, self.delta_t, self.mass, self.rho, self.area, self.C, self.v_x, self.trip_time, 0)
-        self.y_max = max(projectile_calculations.y_vals)
+        # self.y_max = max(projectile_calculations.y_vals)
 
-        return round(self.trip_time, 2), round(self.x_max, 2), round(self.y_max, 2)
+        return round(self.trip_time, 6), round(self.x_max, 6), round(self.y_max, 6)
         
         
         
