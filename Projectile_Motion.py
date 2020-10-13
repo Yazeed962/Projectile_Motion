@@ -3,7 +3,6 @@
 # RUN RECURSIVELY UNTIL Y = 0
 
 import json
-from math import radians
 from Projectile.util import projectile_calculations
 
 
